@@ -26,7 +26,7 @@ def findMatchesBetweenImages(image1, image2, type):
     image_2_kp : list
         The image_2 keypoints, the elements are of type cv2.KeyPoint.
     matches : list
-        A list of matches, length 10. Each item in the list is of type cv2.DMatch.
+        A list of matches. Each item in the list is of type cv2.DMatch.
     """
     matches = None       # type: list of cv2.DMath
     image_1_kp = None    # type: list of cv2.KeyPoint items
@@ -121,8 +121,7 @@ for dirpath, dirnames, fnames in subfolders:
 
     try:
         for name in NAME_KEYS:
-            file_list = reduce(list.__add__, map(glob,
-                [os.path.join(dirpath, '*{}.'.format(name) + ext) for ext in EXTENSIONS]))
+            file_list = reduce(list.__add__, map(glob, [os.path.join(dirpath, '*{}.'.format(name) + ext) for ext in EXTENSIONS]))
 
             if len(file_list) == 0:
                 msg = "  Unable to proceed: no file named {} found in {}"
@@ -148,7 +147,7 @@ template = cv2.imread(image_files['template'])
 del image_files['template']
 
 for transform_name in image_files:
-    print "    Processing {} image".format(transform_name)
+    print "    Processing '{}' image".format(transform_name)
     image = cv2.imread(image_files[transform_name])
     keypoints1, keypoints2, matches = findMatchesBetweenImages(template, image, "ORB")
     annotated_matches = drawMatches(template, keypoints1, image, keypoints2, matches)
