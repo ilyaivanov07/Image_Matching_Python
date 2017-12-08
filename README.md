@@ -1,2 +1,3 @@
-# Image_Matching_Python
-Explore open source image matching algorithms
+# Image Matching
+
+Exploring open source image matching algorithms
