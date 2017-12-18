@@ -46,8 +46,9 @@ def findMatchesBetweenImages(image1, image2, type):
         image_2_kp, image_2_desc = orb.detectAndCompute(image2, None)
         bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
         matches = bf.match(image_1_desc,  image_2_desc)
-        matches = sorted(matches, key = lambda x: x.distance)
-        matches = matches[:10] # return top 10
+        print "  --- got " + str(len(matches)) + " matches "
+        matches = sorted(matches, key = lambda match: match.distance)
+        matches = matches[:20] # return top N matches
 
     return image_1_kp, image_2_kp, matches
 
@@ -150,6 +151,9 @@ for transform_name in image_files:
     print "    Processing '{}' image".format(transform_name)
     image = cv2.imread(image_files[transform_name])
     keypoints1, keypoints2, matches = findMatchesBetweenImages(template, image, "ORB")
+
+    # queryIdx refers to keypoints1 and trainIdx refers to keypoints2
+
     annotated_matches = drawMatches(template, keypoints1, image, keypoints2, matches)
     cv2.imwrite(path.join(output_dir, transform_name + '.jpg'), annotated_matches)
 
