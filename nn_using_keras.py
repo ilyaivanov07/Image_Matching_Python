@@ -1,5 +1,4 @@
-# to run: python keras.py --image images/African_Bush_Elephant.jpg
-
+# to run: python nn_using_keras.py --image images/African_Bush_Elephant.jpg
 
 # https://github.com/fchollet/keras/tree/master/examples
 
@@ -17,9 +16,11 @@ from PIL import Image
 import requests
 from io import BytesIO
 import matplotlib.pyplot as plt
+import h5py as h5py
 
 from keras.preprocessing import image
 from keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions
+
 
 model = ResNet50(weights='imagenet')
 target_size = (224, 224)
