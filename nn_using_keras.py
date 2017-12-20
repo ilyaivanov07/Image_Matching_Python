@@ -16,7 +16,7 @@ from PIL import Image
 import requests
 from io import BytesIO
 import matplotlib.pyplot as plt
-import h5py as h5py
+
 
 from keras.preprocessing import image
 from keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions
@@ -75,12 +75,14 @@ if __name__=="__main__":
     sys.exit(1)
 
   if args.image is not None:
-    img = Image.open(args.image)
+    # img = Image.open(args.image)
+    img = Image.open("images/human.jpg")
     preds = predict(model, img, target_size)
     plot_preds(img, preds)
 
-  if args.image_url is not None:
-    response = requests.get(args.image_url)
-    img = Image.open(BytesIO(response.content))
-    preds = predict(model, img, target_size)
-    plot_preds(img, preds)
+  # if args.image_url is not None:
+  # args.image_url = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.humanrights.gov.au%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Flarge%2Fpublic%2Fnews%2Fimage%2FTimWilson20160215_0.jpg%3Fitok%3DjUa84LIC&imgrefurl=https%3A%2F%2Fwww.humanrights.gov.au%2Fnews%2Fstories%2Fhuman-rights-commissioner-resigns&docid=_yA4coIS0MmUiM&tbnid=z2mV3H7kyDjtaM%3A&vet=10ahUKEwjD262ajpnYAhWFPN8KHR9ZAJwQMwiVASgGMAY..i&w=760&h=425&bih=854&biw=1280&q=human&ved=0ahUKEwjD262ajpnYAhWFPN8KHR9ZAJwQMwiVASgGMAY&iact=mrc&uact=8"
+  # response = requests.get(args.image_url)
+  # img = Image.open(BytesIO(response.content))
+  # preds = predict(model, img, target_size)
+  # plot_preds(img, preds)
