@@ -16,7 +16,7 @@ from keras.optimizers import SGD
 
 IM_WIDTH, IM_HEIGHT = 299, 299 #fixed size for InceptionV3
 NB_EPOCHS = 3
-BAT_SIZE = 32
+BAT_SIZE = 3 #2
 FC_SIZE = 1024
 NB_IV3_LAYERS_TO_FREEZE = 172
 
@@ -70,11 +70,18 @@ def setup_to_finetune(model):
 
 def train(args):
   """Use transfer learning and fine-tuning to train a network on a new dataset"""
-  nb_train_samples = get_nb_files(args.train_dir)
-  nb_classes = len(glob.glob(args.train_dir + "/*"))
-  nb_val_samples = get_nb_files(args.val_dir)
-  nb_epoch = int(args.nb_epoch)
-  batch_size = int(args.batch_size)
+  # nb_train_samples = get_nb_files(args.train_dir)
+  # nb_classes = len(glob.glob(args.train_dir + "/*"))
+  # nb_val_samples = get_nb_files(args.val_dir)
+  # nb_epoch = int(args.nb_epoch)
+  # batch_size = int(args.batch_size)
+
+  nb_train_samples = get_nb_files("images/train")
+  nb_classes = len(glob.glob("images/train/*"))
+  nb_val_samples = get_nb_files("images/validate")
+  nb_epoch = int(NB_EPOCHS)
+  batch_size = int(BAT_SIZE)
+
 
   # data prep
   train_datagen =  ImageDataGenerator(
@@ -97,13 +104,13 @@ def train(args):
   )
 
   train_generator = train_datagen.flow_from_directory(
-    args.train_dir,
+    "images/train",
     target_size=(IM_WIDTH, IM_HEIGHT),
     batch_size=batch_size,
   )
 
   validation_generator = test_datagen.flow_from_directory(
-    args.val_dir,
+    "images/validate",
     target_size=(IM_WIDTH, IM_HEIGHT),
     batch_size=batch_size,
   )
@@ -124,20 +131,20 @@ def train(args):
     class_weight='auto')
 
   # fine-tuning
-  setup_to_finetune(model)
+  # setup_to_finetune(model)
+  #
+  # history_ft = model.fit_generator(
+  #   train_generator,
+  #   samples_per_epoch=nb_train_samples,
+  #   nb_epoch=nb_epoch,
+  #   validation_data=validation_generator,
+  #   nb_val_samples=nb_val_samples,
+  #   class_weight='auto')
 
-  history_ft = model.fit_generator(
-    train_generator,
-    samples_per_epoch=nb_train_samples,
-    nb_epoch=nb_epoch,
-    validation_data=validation_generator,
-    nb_val_samples=nb_val_samples,
-    class_weight='auto')
+  model.save("model")
 
-  model.save(args.output_model_file)
-
-  if args.plot:
-    plot_training(history_ft)
+  # if args.plot:
+  #   plot_training(history_ft)
 
 
 def plot_training(history):
@@ -168,12 +175,12 @@ if __name__=="__main__":
   a.add_argument("--plot", action="store_true")
 
   args = a.parse_args()
-  if args.train_dir is None or args.val_dir is None:
-    a.print_help()
-    sys.exit(1)
-
-  if (not os.path.exists(args.train_dir)) or (not os.path.exists(args.val_dir)):
-    print("directories do not exist")
-    sys.exit(1)
+  # if args.train_dir is None or args.val_dir is None:
+  #   a.print_help()
+  #   sys.exit(1)
+  #
+  # if (not os.path.exists(args.train_dir)) or (not os.path.exists(args.val_dir)):
+  #   print("directories do not exist")
+  #   sys.exit(1)
 
   train(args)

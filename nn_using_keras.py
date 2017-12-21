@@ -76,7 +76,7 @@ if __name__=="__main__":
 
   if args.image is not None:
     # img = Image.open(args.image)
-    img = Image.open("images/human.jpg")
+    img = Image.open("images/2_scale.jpg")
     preds = predict(model, img, target_size)
     plot_preds(img, preds)
 
