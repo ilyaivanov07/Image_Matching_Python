@@ -16,7 +16,7 @@ from keras.optimizers import SGD
 
 IM_WIDTH, IM_HEIGHT = 299, 299 #fixed size for InceptionV3
 NB_EPOCHS = 3
-BAT_SIZE = 3 #2
+BAT_SIZE = 1 #2
 FC_SIZE = 1024
 NB_IV3_LAYERS_TO_FREEZE = 172
 
@@ -51,7 +51,7 @@ def add_new_last_layer(base_model, nb_classes):
   x = GlobalAveragePooling2D()(x)
   x = Dense(FC_SIZE, activation='relu')(x) #new FC layer, random init
   predictions = Dense(nb_classes, activation='softmax')(x) #new softmax layer
-  model = Model(input=base_model.input, output=predictions)
+  model = Model(inputs=base_model.input, outputs=predictions)
   return model
 
 
@@ -76,9 +76,12 @@ def train(args):
   # nb_epoch = int(args.nb_epoch)
   # batch_size = int(args.batch_size)
 
-  nb_train_samples = get_nb_files("images/train")
-  nb_classes = len(glob.glob("images/train/*"))
-  nb_val_samples = get_nb_files("images/validate")
+  train_folder = "images/train"
+  validate_folder = "images/validate"
+
+  nb_train_samples = get_nb_files(train_folder)
+  nb_classes = len(glob.glob(train_folder + "*"))
+  nb_val_samples = get_nb_files(validate_folder)
   nb_epoch = int(NB_EPOCHS)
   batch_size = int(BAT_SIZE)
 
@@ -104,13 +107,13 @@ def train(args):
   )
 
   train_generator = train_datagen.flow_from_directory(
-    "images/train",
+    train_folder,
     target_size=(IM_WIDTH, IM_HEIGHT),
     batch_size=batch_size,
   )
 
   validation_generator = test_datagen.flow_from_directory(
-    "images/validate",
+    validate_folder,
     target_size=(IM_WIDTH, IM_HEIGHT),
     batch_size=batch_size,
   )
