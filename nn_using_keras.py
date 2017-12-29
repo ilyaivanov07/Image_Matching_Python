@@ -22,7 +22,7 @@ from keras.models import load_model
 
 # model = ResNet50(weights='imagenet')
 
-target_size = (224, 224)
+target_size = (150, 150)
 
 
 def predict(model, img, target_size):
@@ -106,7 +106,7 @@ if __name__=="__main__":
 
   if args.image is not None:
     # img = Image.open(args.image)
-    model = load_model("model")
+    model = load_model("examples/first_try.h5")
     img = Image.open("images/2_scale.jpg")
     preds = predict(model, img, target_size)
     plot_preds(img, preds)
