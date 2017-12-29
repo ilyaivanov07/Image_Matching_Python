@@ -27,6 +27,9 @@ def predict(model, img, target_size):
   x = np.expand_dims(x, axis=0)
   x = preprocess_input(x)
   preds = model.predict(x)
+  y_classes = preds.argmax(axis=-1) # this returns the index in the class array
+  print (y_classes)
+
   return preds[0]
 
 
@@ -48,7 +51,10 @@ if __name__=="__main__":
   args = a.parse_args()
 
   model = load_model("examples/first_try.h5")
-  img = Image.open("images/train/cats/cat.1.jpg")
+  img = Image.open("images/train/dogs/dog.1.jpg")
   preds = predict(model, img, target_size)
+  for i in preds:
+      print(i)
+
   plot_preds(img, preds)
 
