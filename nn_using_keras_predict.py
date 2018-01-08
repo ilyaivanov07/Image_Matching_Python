@@ -4,10 +4,13 @@ import numpy as np
 from PIL import Image
 import requests
 from io import BytesIO
-import matplotlib.pyplot as plt
+import matplotlib
+#import matplotlib.pyplot as plt
+matplotlib.use('TkAgg')
 from keras.preprocessing import image
 from keras.models import load_model
 from keras.applications.inception_v3 import preprocess_input
+import matplotlib.pyplot
 
 target_size = (150, 150) #fixed size for InceptionV3 architecture; the size needs to be the same as in the trained model
 
@@ -34,6 +37,7 @@ def predict(model, img, target_size):
 
 
 def plot_preds(image, preds):
+  plt = matplotlib.pyplot
   plt.imshow(image)
   plt.axis('off')
   plt.figure()
