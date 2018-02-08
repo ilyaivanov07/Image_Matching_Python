@@ -27,9 +27,22 @@ for row in robotarium_data:
 
 plt = matplotlib.pyplot
 #plt.plot(robotarium_data[:, 0], robotarium_data[:, 1])
-plt.plot(distances_to_target2)
-plt.ylabel('y')
-plt.xlabel('x')
+
+# all tasks
+#plt.plot(distances_to_target2)
+
+# task 3
+plt.plot(distances_to_target2[370:800])
+
+# task 5
+plt.plot(distances_to_target2[1390:1900])
+
+plt.grid(True)
+#plt.xticks(np.arange(0, 2000, 100.0) )
+#plt.yticks(np.arange(0, 1, .1))
+plt.ylabel('Distance to target2')
+plt.xlabel('iterations')
+plt.legend(('Step 3', 'Step 5'))
 plt.show()
 
 
