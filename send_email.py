@@ -4,7 +4,7 @@ from email.mime.text import MIMEText
 
 fromaddr = "mikskuntz@gmail.com"
 msg_subject = "OMSCS Survey"
-msg_body = "Hello\n\n. I am doing research for the OMSCS EdTech class. Please be kind to answer a couple of questions in this survey: \n\n https://docs.google.com/forms/d/e/1FAIpQLSf5YSiVYvwLdVMYMoqc8mcFEaMsq5g4cpq5wx6URsJsl0dWAQ/viewform?usp=sf_link"
+msg_body = "Hello\n\nI am doing research for the OMSCS EdTech class. Please be kind to answer a couple of questions in this survey: \n\n https://docs.google.com/forms/d/e/1FAIpQLSf5YSiVYvwLdVMYMoqc8mcFEaMsq5g4cpq5wx6URsJsl0dWAQ/viewform?usp=sf_link"
 server = smtplib.SMTP('doittsmtp.nycnet', 25)
 server.starttls()
 
