@@ -12,7 +12,7 @@ file_to_write = open("sent_emails","a")
 
 with open("addresses","r+") as f:
     for line in f:
-        toaddr = line
+        toaddr = line.strip()
         msg = MIMEMultipart()
         msg['From'] = fromaddr
         msg['To'] = toaddr
