@@ -31,19 +31,5 @@ with open("addresses","r+") as f:
 file_to_write.write("\n")
 
 
-# for i in range(1):
-    #fromaddr = "iivanov@doitt.nyc.com"
-    #toaddr = "iivanov8@gatech.edu"
-    #toaddr = "mikskuntz@gmail.com"
-    # toaddr = "iivanov67@yahoo.com"
-    # msg = MIMEMultipart()
-    # msg['From'] = fromaddr
-    # msg['To'] = toaddr
-    # msg['Subject'] = "Survey"
-    # body = "Take the survey:\n\n https://docs.google.com/forms/d/e/1FAIpQLSf5YSiVYvwLdVMYMoqc8mcFEaMsq5g4cpq5wx6URsJsl0dWAQ/viewform?usp=sf_link"
-    # msg.attach(MIMEText(body, 'plain'))
-    # text = msg.as_string()
-    # server.sendmail(fromaddr, toaddr, text)
-
 server.quit()
 file_to_write.close()
