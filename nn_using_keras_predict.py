@@ -55,7 +55,7 @@ if __name__=="__main__":
   args = a.parse_args()
 
   model = load_model("examples/first_try.h5")
-  img = Image.open("images/train/dogs/dog.1.jpg")
+  img = Image.open("images/train/dogs/dog.2.jpg")
   preds = predict(model, img, target_size)
   for i in preds:
       print(i)
