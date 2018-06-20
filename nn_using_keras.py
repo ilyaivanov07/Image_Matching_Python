@@ -4,23 +4,12 @@
 
 # https://github.com/fchollet/keras/tree/master/examples
 
-# Keras is an open source neural network library written in Python.
-# https://keras.io/
-
-# Theano is a numerical computation library for Python.
-# In Theano, computations are expressed using a NumPy-esque syntax and compiled to run efficiently
-# on either CPU or GPU architectures.
-
-import sys
 import argparse
 import numpy as np
 from PIL import Image
-import requests
-from io import BytesIO
 import matplotlib.pyplot as plt
 from keras.preprocessing import image
 from keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions
-from keras.models import load_model
 
 model = ResNet50(weights='imagenet')
 
