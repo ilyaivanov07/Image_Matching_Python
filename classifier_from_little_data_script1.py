@@ -1,5 +1,7 @@
 '''This script goes along the blog post
 
+Ilya: this works on Python 3.5.
+
 https://gist.github.com/fchollet/0830affa1f7f19fd47b06d4cf89ed44d
 
 "Building powerful image classification models using very little data"
