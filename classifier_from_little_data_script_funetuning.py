@@ -74,7 +74,7 @@ epochs = 50
 batch_size = 16
 
 # build the VGG16 network
-model = applications.VGG16(weights='imagenet', include_top=False)
+model = applications.VGG16(include_top=False, weights='imagenet')
 print('Model loaded.')
 
 # build a classifier model to put on top of the convolutional model
@@ -83,6 +83,7 @@ top_model.add(Flatten(input_shape=model.output_shape[1:]))
 top_model.add(Dense(256, activation='relu'))
 top_model.add(Dropout(0.5))
 top_model.add(Dense(1, activation='sigmoid'))
+
 
 # note that it is necessary to start with a fully-trained
 # classifier, including the top classifier,
@@ -99,9 +100,7 @@ for layer in model.layers[:25]:
 
 # compile the model with a SGD/momentum optimizer
 # and a very slow learning rate.
-model.compile(loss='binary_crossentropy',
-              optimizer=optimizers.SGD(lr=1e-4, momentum=0.9),
-              metrics=['accuracy'])
+model.compile(loss='binary_crossentropy', optimizer=optimizers.SGD(lr=1e-4, momentum=0.9), metrics=['accuracy'])
 
 # prepare data augmentation configuration
 train_datagen = ImageDataGenerator(
@@ -125,6 +124,7 @@ validation_generator = test_datagen.flow_from_directory(
     class_mode='binary')
 
 # fine-tune the model
+
 model.fit_generator(
     train_generator,
     samples_per_epoch=nb_train_samples,
