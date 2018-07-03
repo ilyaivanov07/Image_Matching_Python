@@ -1,4 +1,7 @@
 '''
+
+Ilya: this prediction is very very slow
+
 This script goes along my blog post:
 "Keras Cats Dogs Tutorial" (https://jkjung-avt.github.io/keras-tutorial/)
 '''
