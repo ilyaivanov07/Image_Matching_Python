@@ -10,14 +10,16 @@ from tensorflow.python.keras.optimizers import Adam
 from keras.preprocessing.image import ImageDataGenerator
 
 
-DATASET_PATH  = 'data'
-IMAGE_SIZE    = (224, 224)
+# DATASET_PATH  = 'data'
+DATASET_PATH  = 'E:\\deep learning\\face_training\\'
+#IMAGE_SIZE    = (224, 224)
+IMAGE_SIZE    = (200, 200)
 NUM_CLASSES   = 2
 BATCH_SIZE    = 8  # try reducing batch size or freeze more layers if your GPU runs out of memory
 FREEZE_LAYERS = 2  # freeze the first this many layers for training
-NUM_EPOCHS    = 20
-WEIGHTS_FINAL = 'model-resnet50-final.h5'
-
+NUM_EPOCHS    = 2  #20
+# WEIGHTS_FINAL = 'model-resnet50-final.h5'
+WEIGHTS_FINAL = 'model-ilya-resnet50.h5'
 
 train_datagen = ImageDataGenerator(preprocessing_function=preprocess_input,
                                    rotation_range=40,

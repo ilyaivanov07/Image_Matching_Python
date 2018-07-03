@@ -3,8 +3,6 @@ This script goes along my blog post:
 "Keras Cats Dogs Tutorial" (https://jkjung-avt.github.io/keras-tutorial/)
 '''
 
-
-from tensorflow.python.keras import backend as K
 from tensorflow.python.keras.models import load_model
 from tensorflow.python.keras.applications.resnet50 import preprocess_input
 from tensorflow.python.keras.preprocessing import image
@@ -42,16 +40,24 @@ def get_files(path):
 
 
 if __name__ == '__main__':
-    args = parse_args()
-    files = get_files(args.path)
-    cls_list = ['cats', 'dogs']
+    # args = parse_args()
+    # files = get_files(args.path)
+
+    path = 'images/ilya2.jpg'
+
+    files = get_files(path)
+    cls_list = ['cats', 'ilya']
 
     # load the trained model
-    net = load_model('model-resnet50-final.h5')
+    # net = load_model('model-resnet50-final.h5')
+    net = load_model('model-ilya-resnet50.h5')
+
 
     # loop through all files and make predictions
     for f in files:
-        img = image.load_img(f, target_size=(224,224))
+        # img = image.load_img(f, target_size=(224,224))
+        img = image.load_img(f, target_size=(200,200))
+
         if img is None:
             continue
         x = image.img_to_array(img)

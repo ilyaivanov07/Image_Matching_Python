@@ -51,11 +51,8 @@ def plot_preds(image, preds):
 
 
 if __name__=="__main__":
-  a = argparse.ArgumentParser()
-  args = a.parse_args()
-
-  model = load_model("examples/first_try.h5")
-  img = Image.open("images/train/dogs/dog.2.jpg")
+  model = load_model("first_try.h5")
+  img = Image.open("images/cat.1.jpg")
   preds = predict(model, img, target_size)
   for i in preds:
       print(i)
